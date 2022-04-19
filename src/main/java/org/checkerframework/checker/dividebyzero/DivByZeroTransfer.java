@@ -71,7 +71,104 @@ public class DivByZeroTransfer extends CFTransfer {
             Comparison operator,
             AnnotationMirror lhs,
             AnnotationMirror rhs) {
-        // TODO
+        // TODO: done
+        AnnotationMirror top = reflect(Top.class);
+        AnnotationMirror zero = reflect(Zero.class);
+        AnnotationMirror nonZero = reflect(NonZero.class);
+        AnnotationMirror pos = reflect(Pos.class);
+        AnnotationMirror neg = reflect(Neg.class);
+        AnnotationMirror bottom = reflect(Bottom.class);
+        switch (operator) {
+            case EQ:
+                return glb(lhs, rhs);
+            case NE:
+                if (lhs.equals(bottom)) {
+                    return bottom;
+                } else if (lhs.equals(pos)) {
+                    return pos;
+                } else if (lhs.equals(neg)) {
+                    return neg;
+                } else if (lhs.equals(zero)) {
+                    return zero;
+                } else if (lhs.equals(nonZero)) {
+                    return nonZero;
+                } else if (lhs.equals(top)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return nonZero;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return top;
+                    }
+                }
+                break;
+            case LT:
+                if (rhs.equals(top)) {
+                    return glb(lhs, top);
+                } else if (rhs.equals(zero)) {
+                    return glb(lhs, neg);
+                } else if (rhs.equals(nonZero)) {
+                    return lhs;
+                } else if (rhs.equals(pos)){
+                    return lhs;
+                } else if (rhs.equals(neg)) {
+                    return glb(lhs, neg);
+                } else if (rhs.equals(bottom)) {
+                    return lhs;
+                }
+                break;
+            case LE:
+                if (rhs.equals(top)) {
+                    return lhs;
+                } else if (rhs.equals(zero)) {
+                    return lhs;
+                } else if (rhs.equals(nonZero)) {
+                    return lhs;
+                } else if (rhs.equals(pos)){
+                    return lhs;
+                } else if (rhs.equals(neg)) {
+                    return glb(lhs, neg);
+                } else if (rhs.equals(bottom)) {
+                    return lhs;
+                }
+                break;
+            case GT:
+                if (rhs.equals(top)) {
+                    return lhs;
+                } else if (rhs.equals(zero)) {
+                    return glb(lhs, pos);
+                } else if (rhs.equals(nonZero)) {
+                    return lhs;
+                } else if (rhs.equals(pos)){
+                    return glb(lhs, pos);
+                } else if (rhs.equals(neg)) {
+                    return lhs;
+                } else if (rhs.equals(bottom)) {
+                    return lhs;
+                }
+                break;
+            case GE:
+                if (rhs.equals(top)) {
+                    return lhs;
+                } else if (rhs.equals(zero)) {
+                    return lhs;
+                } else if (rhs.equals(nonZero)) {
+                    return lhs;
+                } else if (rhs.equals(pos)){
+                    return glb(lhs, pos);
+                } else if (rhs.equals(neg)) {
+                    return lhs;
+                } else if (rhs.equals(bottom)) {
+                    return lhs;
+                }
+                break;
+        }
         return lhs;
     }
 
@@ -93,8 +190,391 @@ public class DivByZeroTransfer extends CFTransfer {
             BinaryOperator operator,
             AnnotationMirror lhs,
             AnnotationMirror rhs) {
-        // TODO
-        return top();
+        // TODO: done
+        AnnotationMirror top = reflect(Top.class);
+        AnnotationMirror zero = reflect(Zero.class);
+        AnnotationMirror nonZero = reflect(NonZero.class);
+        AnnotationMirror pos = reflect(Pos.class);
+        AnnotationMirror neg = reflect(Neg.class);
+        AnnotationMirror bottom = reflect(Bottom.class);
+        switch(operator) {
+            case PLUS:
+                if (lhs.equals(bottom)) {
+                    return bottom;
+                } else if (lhs.equals(pos)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return pos;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return pos;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(neg)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return neg;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return neg;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(zero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return zero;
+                    } else if (rhs.equals(nonZero)) {
+                        return nonZero;
+                    } else if (rhs.equals(pos)) {
+                        return pos;
+                    } else if (rhs.equals(neg)) {
+                        return neg;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(nonZero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return nonZero;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(top)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return top;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                }
+                break;
+            case MINUS:
+                if (lhs.equals(bottom)) {
+                    return bottom;
+                } else if (lhs.equals(pos)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return pos;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return pos;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(neg)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return neg;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return neg;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(zero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return zero;
+                    } else if (rhs.equals(nonZero)) {
+                        return nonZero;
+                    } else if (rhs.equals(pos)) {
+                        return neg;
+                    } else if (rhs.equals(neg)) {
+                        return pos;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(nonZero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return nonZero;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(top)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return top;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                }
+                break;
+            case TIMES:
+                if (lhs.equals(bottom)) {
+                    return bottom;
+                } else if (lhs.equals(pos)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return zero;
+                    } else if (rhs.equals(nonZero)) {
+                        return nonZero;
+                    } else if (rhs.equals(pos)) {
+                        return pos;
+                    } else if (rhs.equals(neg)) {
+                        return neg;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(neg)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return zero;
+                    } else if (rhs.equals(nonZero)) {
+                        return nonZero;
+                    } else if (rhs.equals(pos)) {
+                        return neg;
+                    } else if (rhs.equals(neg)) {
+                        return pos;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(zero)) {
+                    if (rhs.equals(top)) {
+                        return zero;
+                    } else if (rhs.equals(zero)) {
+                        return zero;
+                    } else if (rhs.equals(nonZero)) {
+                        return zero;
+                    } else if (rhs.equals(pos)) {
+                        return zero;
+                    } else if (rhs.equals(neg)) {
+                        return zero;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(nonZero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return zero;
+                    } else if (rhs.equals(nonZero)) {
+                        return nonZero;
+                    } else if (rhs.equals(pos)) {
+                        return nonZero;
+                    } else if (rhs.equals(neg)) {
+                        return nonZero;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(top)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return zero;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                }
+                break;
+            case DIVIDE:
+                if (lhs.equals(bottom)) {
+                    return bottom;
+                } else if (lhs.equals(pos)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return pos;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(neg)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return neg;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(zero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return zero;
+                    } else if (rhs.equals(pos)) {
+                        return zero;
+                    } else if (rhs.equals(neg)) {
+                        return zero;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(nonZero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(top)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                }
+                break;
+            case MOD:
+                if (lhs.equals(bottom)) {
+                    return bottom;
+                } else if (lhs.equals(pos)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(neg)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(zero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return zero;
+                    } else if (rhs.equals(pos)) {
+                        return zero;
+                    } else if (rhs.equals(neg)) {
+                        return zero;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(nonZero)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                } else if (lhs.equals(top)) {
+                    if (rhs.equals(top)) {
+                        return top;
+                    } else if (rhs.equals(zero)) {
+                        return bottom;
+                    } else if (rhs.equals(nonZero)) {
+                        return top;
+                    } else if (rhs.equals(pos)) {
+                        return top;
+                    } else if (rhs.equals(neg)) {
+                        return top;
+                    } else if (rhs.equals(bottom)) {
+                        return bottom;
+                    }
+                }
+                break;
+        }
+        return top;
     }
 
     // ========================================================================
