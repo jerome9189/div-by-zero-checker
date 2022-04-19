@@ -82,89 +82,89 @@ public class DivByZeroTransfer extends CFTransfer {
             case EQ:
                 return glb(lhs, rhs);
             case NE:
-                if (lhs.equals(bottom)) {
+                if (equal(lhs, bottom)) {
                     return bottom;
-                } else if (lhs.equals(pos)) {
+                } else if (equal(lhs, pos)) {
                     return pos;
-                } else if (lhs.equals(neg)) {
+                } else if (equal(lhs, neg)) {
                     return neg;
-                } else if (lhs.equals(zero)) {
+                } else if (equal(lhs, zero)) {
                     return zero;
-                } else if (lhs.equals(nonZero)) {
+                } else if (equal(lhs, nonZero)) {
                     return nonZero;
-                } else if (lhs.equals(top)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, top)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return nonZero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return top;
                     }
                 }
                 break;
             case LT:
-                if (rhs.equals(top)) {
+                if (equal(rhs, top)) {
                     return glb(lhs, top);
-                } else if (rhs.equals(zero)) {
+                } else if (equal(rhs, zero)) {
                     return glb(lhs, neg);
-                } else if (rhs.equals(nonZero)) {
+                } else if (equal(rhs, nonZero)) {
                     return lhs;
-                } else if (rhs.equals(pos)){
+                } else if (equal(rhs, pos)){
                     return lhs;
-                } else if (rhs.equals(neg)) {
+                } else if (equal(rhs, neg)) {
                     return glb(lhs, neg);
-                } else if (rhs.equals(bottom)) {
+                } else if (equal(rhs, bottom)) {
                     return lhs;
                 }
                 break;
             case LE:
-                if (rhs.equals(top)) {
+                if (equal(rhs, top)) {
                     return lhs;
-                } else if (rhs.equals(zero)) {
+                } else if (equal(rhs, zero)) {
                     return lhs;
-                } else if (rhs.equals(nonZero)) {
+                } else if (equal(rhs, nonZero)) {
                     return lhs;
-                } else if (rhs.equals(pos)){
+                } else if (equal(rhs, pos)){
                     return lhs;
-                } else if (rhs.equals(neg)) {
+                } else if (equal(rhs, neg)) {
                     return glb(lhs, neg);
-                } else if (rhs.equals(bottom)) {
+                } else if (equal(rhs, bottom)) {
                     return lhs;
                 }
                 break;
             case GT:
-                if (rhs.equals(top)) {
+                if (equal(rhs, top)) {
                     return lhs;
-                } else if (rhs.equals(zero)) {
+                } else if (equal(rhs, zero)) {
                     return glb(lhs, pos);
-                } else if (rhs.equals(nonZero)) {
+                } else if (equal(rhs, nonZero)) {
                     return lhs;
-                } else if (rhs.equals(pos)){
+                } else if (equal(rhs, pos)){
                     return glb(lhs, pos);
-                } else if (rhs.equals(neg)) {
+                } else if (equal(rhs, neg)) {
                     return lhs;
-                } else if (rhs.equals(bottom)) {
+                } else if (equal(rhs, bottom)) {
                     return lhs;
                 }
                 break;
             case GE:
-                if (rhs.equals(top)) {
+                if (equal(rhs, top)) {
                     return lhs;
-                } else if (rhs.equals(zero)) {
+                } else if (equal(rhs, zero)) {
                     return lhs;
-                } else if (rhs.equals(nonZero)) {
+                } else if (equal(rhs, nonZero)) {
                     return lhs;
-                } else if (rhs.equals(pos)){
+                } else if (equal(rhs, pos)){
                     return glb(lhs, pos);
-                } else if (rhs.equals(neg)) {
+                } else if (equal(rhs, neg)) {
                     return lhs;
-                } else if (rhs.equals(bottom)) {
+                } else if (equal(rhs, bottom)) {
                     return lhs;
                 }
                 break;
@@ -199,376 +199,376 @@ public class DivByZeroTransfer extends CFTransfer {
         AnnotationMirror bottom = reflect(Bottom.class);
         switch(operator) {
             case PLUS:
-                if (lhs.equals(bottom)) {
+                if (equal(lhs, bottom)) {
                     return bottom;
-                } else if (lhs.equals(pos)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, pos)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return pos;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return pos;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(neg)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, neg)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return neg;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return neg;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(zero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, zero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return zero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return nonZero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return pos;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return neg;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(nonZero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, nonZero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return nonZero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(top)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, top)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return top;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
                 }
                 break;
             case MINUS:
-                if (lhs.equals(bottom)) {
+                if (equal(lhs, bottom)) {
                     return bottom;
-                } else if (lhs.equals(pos)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, pos)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return pos;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return pos;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(neg)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, neg)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return neg;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return neg;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(zero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, zero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return zero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return nonZero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return neg;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return pos;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(nonZero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, nonZero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return nonZero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(top)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, top)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return top;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
                 }
                 break;
             case TIMES:
-                if (lhs.equals(bottom)) {
+                if (equal(lhs, bottom)) {
                     return bottom;
-                } else if (lhs.equals(pos)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, pos)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return zero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return nonZero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return pos;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return neg;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(neg)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, neg)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return zero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return nonZero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return neg;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return pos;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(zero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, zero)) {
+                    if (equal(rhs, top)) {
                         return zero;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return zero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return zero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return zero;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return zero;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(nonZero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, nonZero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return zero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return nonZero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return nonZero;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return nonZero;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(top)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, top)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return zero;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
                 }
                 break;
             case DIVIDE:
-                if (lhs.equals(bottom)) {
+                if (equal(lhs, bottom)) {
                     return bottom;
-                } else if (lhs.equals(pos)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, pos)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return pos;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(neg)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, neg)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return neg;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(zero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, zero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return zero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return zero;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return zero;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(nonZero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, nonZero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(top)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, top)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
                 }
                 break;
             case MOD:
-                if (lhs.equals(bottom)) {
+                if (equal(lhs, bottom)) {
                     return bottom;
-                } else if (lhs.equals(pos)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, pos)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
-                        return bottom;
-                    }
-                } else if (lhs.equals(neg)) {
-                    if (rhs.equals(top)) {
-                        return top;
-                    } else if (rhs.equals(zero)) {
-                        return bottom;
-                    } else if (rhs.equals(nonZero)) {
-                        return top;
-                    } else if (rhs.equals(pos)) {
-                        return top;
-                    } else if (rhs.equals(neg)) {
-                        return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(zero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, neg)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
+                        return top;
+                    } else if (equal(rhs, pos)) {
+                        return top;
+                    } else if (equal(rhs, neg)) {
+                        return top;
+                    } else if (equal(rhs, bottom)) {
+                        return bottom;
+                    }
+                } else if (equal(lhs, zero)) {
+                    if (equal(rhs, top)) {
+                        return top;
+                    } else if (equal(rhs, zero)) {
+                        return bottom;
+                    } else if (equal(rhs, nonZero)) {
                         return zero;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return zero;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return zero;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(nonZero)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, nonZero)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
-                } else if (lhs.equals(top)) {
-                    if (rhs.equals(top)) {
+                } else if (equal(lhs, top)) {
+                    if (equal(rhs, top)) {
                         return top;
-                    } else if (rhs.equals(zero)) {
+                    } else if (equal(rhs, zero)) {
                         return bottom;
-                    } else if (rhs.equals(nonZero)) {
+                    } else if (equal(rhs, nonZero)) {
                         return top;
-                    } else if (rhs.equals(pos)) {
+                    } else if (equal(rhs, pos)) {
                         return top;
-                    } else if (rhs.equals(neg)) {
+                    } else if (equal(rhs, neg)) {
                         return top;
-                    } else if (rhs.equals(bottom)) {
+                    } else if (equal(rhs, bottom)) {
                         return bottom;
                     }
                 }

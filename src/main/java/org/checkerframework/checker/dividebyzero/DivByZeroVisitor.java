@@ -30,14 +30,18 @@ public class DivByZeroVisitor extends BaseTypeVisitor<DivByZeroAnnotatedTypeFact
     private boolean errorAt(BinaryTree node) {
         // A BinaryTree can represent any binary operator, including + or -.
         // TODO
+        // System.out.println("--expression--");
+        // System.out.println(node);
         if (node == null || !DIVISION_OPERATORS.contains(node.getKind())) {
             return false;
         }
-        
-        System.out.println(node);
+        // System.out.println("past first if check");
         Tree right = node.getRightOperand();
+        // System.out.println("right node: " + right);
         if (isInt(right)) {
-            if (hasAnnotation(right, Top.class) || hasAnnotation(node, Zero.class)) {
+            if (hasAnnotation(right, Top.class) || hasAnnotation(right, Zero.class)) {
+                System.out.println(right);
+                System.out.println(atypeFactory.getAnnotatedType(right));
                 return true;
             }
         }
